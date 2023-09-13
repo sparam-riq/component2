@@ -1,0 +1,4 @@
+apiVersion: v2
+name: demo-hello-world
+description: A Helm chart for deploying your Spring Boot application
+version: 0.1.0
