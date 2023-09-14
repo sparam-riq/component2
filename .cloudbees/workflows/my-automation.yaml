@@ -10,7 +10,7 @@ jobs:
   build-deploy:
     steps:
       - name: Deploy Using CBCI
-        uses: cloudbees-io/cbci-run-job
+        uses: cloudbees-io/jenkins-run-job
         with:
           url: https://releaseiq.ironman.releaseiq.io/
           username: ${{ secrets.CBCI_IRONMAN_USERNAME }}
