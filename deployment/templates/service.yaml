@@ -4,7 +4,7 @@ metadata:
   name: {{ .Values.service.name }}
 spec:
   selector:
-    app.kubernetes.io/name: {{ include "your-helm-chart-name.name" . }}
+    app.kubernetes.io/name: {{ include "demo-component2.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
   ports:
     - protocol: TCP

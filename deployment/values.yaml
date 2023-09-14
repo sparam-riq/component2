@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: your-docker-image-name
+  repository: demo_component2
   tag: latest
   pullPolicy: IfNotPresent
 
