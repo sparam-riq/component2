@@ -17,13 +17,17 @@ jobs:
           password: ${{ secrets.CBCI_IRONMAN_PASSWORD }}
           job-name: demo_build_component2
           parameters: '{"TAG_NAME":"${{ cloudbees.scm.sha }}"}'
-      - id: write-kubeconfig
-        name: Write kubeconfig
-        uses: docker://alpine:3.18
+      - name: ConfigureAWSCredentials
+        uses: cloudbees-io/configure-aws-credentials@v0.0.4
+        with:
+          aws-access-key-id: ${{ secrets.RIQ_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.RIQ_SECRET_KEY }}
+          aws-region: us-west-2
+      - id: kubeconfig-context-update
+        name: kubeconfig-context-update
+        uses: docker://amazon/aws-cli
         run: |
-          mkdir -p ${HOME}/.kube
-          echo -e "${{ secrets.RIQ_KUBECONFIG }}" > ${HOME}/.kube/config
-          cat ${HOME}/.kube/config
+          aws eks update-kubeconfig --region us-west-2 --name riq-prod-cluster01
       - id: install-chart
         name: Install reports-service helm chart
         uses: cloudbees-io/helm-install
