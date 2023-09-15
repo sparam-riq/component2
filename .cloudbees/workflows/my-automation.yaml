@@ -32,8 +32,8 @@ jobs:
         name: Install reports-service helm chart
         uses: cloudbees-io/helm-install
         with:
-          chart-location: .deployment/
-          version: 0.0.1
+          chart-location: ${{ cloudbees.workspace }}/deployment/
+          version: 0.1.0
           release-name: demo-component2
           namespace: saas-demo
           values: |
