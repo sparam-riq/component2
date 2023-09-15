@@ -32,7 +32,7 @@ jobs:
         name: Install reports-service helm chart
         uses: cloudbees-io/helm-install
         with:
-          chart-location: deployment
+          chart-location: deployment/
           version: 0.0.1
           release-name: demo-component2
           namespace: saas-demo
