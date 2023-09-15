@@ -6,6 +6,6 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  name: your-service-name
+  name: demo-component2
   type: ClusterIP
   port: 8080

@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "demo-component2.fullname" . }}
+  name: {{ .Values.service.name }}
   labels:
-    app.kubernetes.io/name: {{ include "demo-component2.name" . }}
+    app.kubernetes.io/name: {{ .Values.service.name }}
     app.kubernetes.io/instance: {{ .Release.Name }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "demo-component2.name" . }}
+      app.kubernetes.io/name: {{ .Values.service.name }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "demo-component2.name" . }}
+        app.kubernetes.io/name: {{ .Values.service.name }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
