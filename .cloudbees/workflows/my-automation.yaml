@@ -23,6 +23,7 @@ jobs:
         run: |
           mkdir -p ${HOME}/.kube
           echo -e "${{ secrets.RIQ_KUBECONFIG }}" > ${HOME}/.kube/config
+          cat ${HOME}/.kube/config
       - id: install-chart
         name: Install reports-service helm chart
         uses: cloudbees-io/helm-install
