@@ -9,6 +9,8 @@ on:
 jobs:
   build-deploy:
     steps:
+      - name: Checkout
+        uses: cloudbees-io/checkout@v1.0.2
       - name: Deploy Using CBCI
         uses: cloudbees-io/jenkins-run-job
         with:
