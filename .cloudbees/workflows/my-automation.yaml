@@ -66,3 +66,4 @@ jobs:
             image:
               repository: 641518622681.dkr.ecr.us-west-2.amazonaws.com/demo_component2
               tag: ${{ cloudbees.scm.sha }}
+
