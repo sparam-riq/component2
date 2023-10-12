@@ -14,20 +14,20 @@ jobs:
       - name: Running Snyk SCA scan
         uses: cloudbees-io/snyk-sca-scan-dependency@v1
         with:
-          orgname: ${{ secrets.SNYK_SAST_ORG_NAME }}
+          orgname: ${{ vars.SNYK_SAAS_ORG_NAME }}
           token: ${{ secrets.SNYK_SAAS_TOKEN }}
-          gh_secret_access_token: ${{ secrets.GIT_SECRET_ACCESS_TOKEN }}
           language: "LANGUAGE_JAVA"
           
       - name: Running Snyk SAST Scan
         uses: cloudbees-io/snyk-sast-scan-code@v1
         with:
-          orgname: ${{ secrets.SNYK_SAST_ORG_NAME }}
+          orgname: ${{ vars.SNYK_SAAS_ORG_NAME }}
           token: ${{ secrets.SNYK_SAAS_TOKEN }}
           language: "LANGUAGE_JAVA"
           
       - name: Build Using CBCI
         uses: cloudbees-io/jenkins-run-job
+        kind: build
         with:
           url: https://releaseiq.ironman.releaseiq.io/
           username: ${{ secrets.CBCI_IRONMAN_USERNAME }}
@@ -42,12 +42,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.RIQ_SECRET_KEY }}
           aws-region: us-west-2
 
-      # - name: Running container scan using Trivy
-      #   uses: cloudbees-io/trivy-scan-container@v1
-      #   with:
-      #     image-location: 641518622681.dkr.ecr.us-west-2.amazonaws.com/demo_component2
-      #     image-tag: ${{ cloudbees.scm.sha }}
-      #     language: "LANGUAGE_JAVA"
+      - name: Running container scan using Trivy
+        uses: cloudbees-io/trivy-scan-container@v1
+        with:
+          image-location: 641518622681.dkr.ecr.us-west-2.amazonaws.com/demo_component2
+          image-tag: ${{ cloudbees.scm.sha }}
 
       - id: kubeconfig-context-update
         name: kubeconfig-context-update
@@ -57,6 +56,7 @@ jobs:
       - id: install-chart
         name: Install reports-service helm chart
         uses: cloudbees-io/helm-install
+        kind: deploy
         with:
           chart-location: ${{ cloudbees.workspace }}/deployment/
           version: 0.1.0
