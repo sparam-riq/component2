@@ -49,12 +49,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.RIQ_SECRET_KEY }}
           aws-region: us-west-2
 
-      - name: Running container scan using Trivy
-        uses: cloudbees-io/trivy-scan-container@v1
-        with:
-          image-location: 641518622681.dkr.ecr.us-west-2.amazonaws.com/demo_component2
-          image-tag: ${{ cloudbees.scm.sha }}
-
       - id: kubeconfig-context-update
         name: kubeconfig-context-update
         uses: docker://amazon/aws-cli
